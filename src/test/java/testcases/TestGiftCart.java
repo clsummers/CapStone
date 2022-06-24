@@ -3,6 +3,7 @@ package testcases;
 import library.SelectBrowser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
@@ -22,32 +23,39 @@ public class TestGiftCart {
     @BeforeTest
     public void browserLauncher()    {
         driver = SelectBrowser.StartBrowser("Chrome");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.get("https://www.alexandnova.com/");
     }
 
 
     //verify that user can apply for a discount code at checkout page
     @Test(priority = 1)
-    public void apply_discount_code_test(){
+    public void apply_discount_code_test() throws InterruptedException {
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+       // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         clearancePage.selectItem();
         itemDescriptionPage = new ItemDescriptionPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Thread.sleep(3000);
         itemDescriptionPage.selectSize();
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
+        Thread.sleep(3000);
         itemDescriptionPage.goToCart();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
         cartPage = new CartPage(driver);
         cartPage.clickOnCheckoutButton();
+        Thread.sleep(3000);
         checkoutPage = new CheckoutPage(driver);
-        checkoutPage.enterDiscountCode("COUPON");
+        checkoutPage.enterCouponCode("MASK15");
+        Thread.sleep(3000);
         checkoutPage.clickOnApplyButton();
-        //add assertions
+
+        String expectedResult = "Discount";
+        String actualResult = checkoutPage.verifyDiscount();
+        Assert.assertEquals(expectedResult, actualResult);
+
 
 
     }

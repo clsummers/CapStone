@@ -36,12 +36,14 @@ public class TestUserLogin {
     public void verify_login_user_page() throws InterruptedException {
         mainPage = new MainPage(driver);
         mainPage.clickOnAccountLink();
-        //check to see if captcha comes up and add thread sleep
         loginPage = new LoginPage(driver);
         loginPage.inputEmail("test@gmail.com");
         loginPage.inputPassword("P@ssword");
         loginPage.clickLoginButton();
-        Thread.sleep(10000);
+        Thread.sleep(90000);
+        String expected = "Welcome, john";
+        String actual = loginPage.getWelcomeMessage();
+        Assert.assertEquals(expected, actual);
 
         //Add assertion: Verify that the User Dashboard Page is displayed.
 
@@ -53,7 +55,7 @@ public class TestUserLogin {
       mainPage = new MainPage(driver);
       mainPage.clickOnAccountLink();
       loginPage = new LoginPage(driver);
-      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+      //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
       loginPage.inputEmail("test@testmail.com");
       loginPage.inputPassword("P@ssword");
       loginPage.clickLoginButton();

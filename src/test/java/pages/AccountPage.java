@@ -18,7 +18,9 @@ public class AccountPage {
         PageFactory.initElements(driver, this );
     }
 
-    @FindBy(className = "button secondary navigable")
+//    @FindBy(className = "button secondary navigable")
+//
+    @FindBy(css = ".button.secondary.navigable[href='/account/register']")
     WebElement registerButton;
 
     @FindBy(id = "ispbxii_1")

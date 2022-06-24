@@ -1,8 +1,13 @@
 package testcases;
 
+import library.Screenshots;
 import library.SelectBrowser;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.AccountPage;
@@ -11,6 +16,8 @@ import pages.MainPage;
 import pages.SignUpPage;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 public class TestUserRegistration {
@@ -20,6 +27,7 @@ public class TestUserRegistration {
     AccountPage accountPage;
     SignUpPage signUpPage;
     LoginPage loginPage;
+    Screenshots screenshots;
 
 
 
@@ -71,7 +79,7 @@ public class TestUserRegistration {
         mainPage = new MainPage(driver);
         mainPage.clickOnAccountLink();
         accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         accountPage.clickOnRegisterButton();
         signUpPage = new SignUpPage(driver);
         signUpPage.inputFirstName("Fink");
@@ -93,7 +101,7 @@ public class TestUserRegistration {
         mainPage = new MainPage(driver);
         mainPage.clickOnAccountLink();
         accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         accountPage.clickOnRegisterButton();
         signUpPage = new SignUpPage(driver);
         signUpPage.inputFirstName("Fink");
@@ -139,7 +147,7 @@ public class TestUserRegistration {
         mainPage = new MainPage(driver);
         mainPage.clickOnAccountLink();
         accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         accountPage.clickOnRegisterButton();
         signUpPage = new SignUpPage(driver);
         signUpPage.inputFirstName("Fink");
@@ -158,11 +166,11 @@ public class TestUserRegistration {
 
    //Negative testing for Mandatory fields
     @Test(priority = 7)
-    public void leave_out_mandatory_fields_test() throws InterruptedException {
+    public void leave_out_mandatory_fields_test() throws InterruptedException, IOException {
         mainPage = new MainPage(driver);
         mainPage.clickOnAccountLink();
         accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         accountPage.clickOnRegisterButton();
         signUpPage = new SignUpPage(driver);
         //signUpPage.inputFirstName("Fink");
@@ -176,6 +184,10 @@ public class TestUserRegistration {
         String expected = "Sorry! Please try that again.";
         String actual = loginPage.getAlertText();
         Assert.assertEquals(expected, actual);
+//        // take screenshot
+        //File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        //FileUtils.copyFile(file, new File("C:\\Users\\colli\\Summers_Collin_Capstone_CaseStudy\\Summers_Collin_Capstone_CaseStudy\\src\\test\\resources\\screenshots"));
+
     }
 
 
@@ -185,7 +197,7 @@ public class TestUserRegistration {
         mainPage = new MainPage(driver);
         mainPage.clickOnAccountLink();
         accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         accountPage.clickOnRegisterButton();
         signUpPage = new SignUpPage(driver);
         signUpPage.inputFirstName("Fink");
@@ -199,6 +211,18 @@ public class TestUserRegistration {
         String expected = "Sorry! Please try that again.";
         String actual = loginPage.getAlertText();
         Assert.assertEquals(expected, actual);
+    }
+
+    @AfterMethod
+    public void takeScreenShot() {
+        try {
+            File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(file, new File("C:\\Users\\colli\\Summers_Collin_Capstone_CaseStudy\\Summers_Collin_Capstone_CaseStudy\\src\\test\\resources\\screenshots"));
+            System.out.println("Taking screenshot");
+        } catch (Exception e)
+        {
+            System.out.println("Could not save screenshot. Hey there mom.");
+        }
     }
 
 

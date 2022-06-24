@@ -22,13 +22,11 @@ public class MainPage {
 
     @FindBy(id = "customer_login_link")
     WebElement accountButton;
-
-
-
     //By accountButton = By.id(("//a[@id='customer_login_link']"));
 
-    //@FindBy(className = "header-search-input ui-autocomplete-input")
-    //WebElement searchBar;
+
+    @FindBy(name = "q")
+    WebElement searchBar;
 
     // Page Factory
     @FindBy(className = "header-search-button")
@@ -48,13 +46,13 @@ public class MainPage {
         (accountButton).click();
     }
 
-//    public void inputSearch(String search){
-//        searchBar.sendKeys(search);
-//    }
-//
-//    public void clickSearchButton(){
-//        searchButton.click();
-//    }
+    public void inputSearch(String search){
+        searchBar.sendKeys(search);
+    }
+
+    public void clickSearchButton(){
+        searchButton.click();
+    }
 
     public  void clickClearanceButton(){
         clearance.click();

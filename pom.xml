@@ -139,7 +139,7 @@
             <systemPropertyVariables>
               <propertyName>firefox</propertyName>
             </systemPropertyVariables>
-            <groups>functest,perftest</groups>
+<!--            <groups>functest,perftest</groups>-->
           </configuration>
         </plugin>
       </plugins>

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.devtools.v85.page.Page;
@@ -15,11 +16,19 @@ public class ClearancePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(partialLinkText = "Organic Cotton Reusable Face Mask")
-    WebElement faceMask;
+    @FindBy(css = "article[id='product-list-item-2325367881785'] div[class='product-list-item-details'] a[class='navigable']")
+    WebElement meshShoes;
+
+    @FindBy(css = ".product-price")
+    WebElement priceOfItem;
+
+
+    public String verifyPrice(){
+        return driver.findElement((By) priceOfItem).getText();
+    }
 
     public void selectItem(){
-        faceMask.click();
+        meshShoes.click();
     }
 
 
