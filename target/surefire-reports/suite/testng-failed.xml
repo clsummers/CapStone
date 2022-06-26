@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [suite]">
+  <test name="test1(failed)">
+    <classes>
+      <class name="testcases.TestAddToCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestAddToCart -->
+      <class name="testcases.TestSearchFunction">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestSearchFunction -->
+      <class name="testcases.TestUserRegistration">
+        <methods>
+          <include name="invalid_password_test"/>
+          <include name="email_validation_no_at_test"/>
+          <include name="email_validation_random_string_test"/>
+          <include name="email_validation_written_at_test"/>
+          <include name="email_validation_missing_period_test"/>
+          <include name="takeScreenShot"/>
+          <include name="verify_register_new_user"/>
+          <include name="leave_out_mandatory_fields_test"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserRegistration -->
+      <class name="testcases.TestUserLogin">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserLogin -->
+      <class name="testcases.TestGiftCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestGiftCart -->
+      <class name="testcases.TestCheckout">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestCheckout -->
+    </classes>
+  </test> <!-- test1(failed) -->
+  <test name="test2(failed)">
+    <classes>
+      <class name="testcases.TestAddToCart">
+        <methods>
+          <include name="browserLauncher"/>
+          <include name="verify_product_is_added_to_cart_test"/>
+          <include name="remove_product_from_cart_test"/>
+          <include name="refresh_page_test"/>
+          <include name="verify_correct_amount_in_cart_test"/>
+          <include name="verify_product_display_price_test"/>
+          <include name="increase_quantity_test"/>
+        </methods>
+      </class> <!-- testcases.TestAddToCart -->
+      <class name="testcases.TestSearchFunction">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestSearchFunction -->
+      <class name="testcases.TestUserRegistration">
+        <methods>
+          <include name="takeScreenShot"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserRegistration -->
+      <class name="testcases.TestUserLogin">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserLogin -->
+      <class name="testcases.TestGiftCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestGiftCart -->
+      <class name="testcases.TestCheckout">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestCheckout -->
+    </classes>
+  </test> <!-- test2(failed) -->
+  <test name="test3(failed)">
+    <classes>
+      <class name="testcases.TestAddToCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestAddToCart -->
+      <class name="testcases.TestSearchFunction">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestSearchFunction -->
+      <class name="testcases.TestUserRegistration">
+        <methods>
+          <include name="takeScreenShot"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserRegistration -->
+      <class name="testcases.TestUserLogin">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserLogin -->
+      <class name="testcases.TestCheckout">
+        <methods>
+          <include name="visa_card_payment_test"/>
+          <include name="master_card_payment_test"/>
+          <include name="shop_pay_payment_test"/>
+          <include name="paypal_payment_test"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestCheckout -->
+      <class name="testcases.TestGiftCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestGiftCart -->
+    </classes>
+  </test> <!-- test3(failed) -->
+  <test name="test4(failed)">
+    <classes>
+      <class name="testcases.TestAddToCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestAddToCart -->
+      <class name="testcases.TestSearchFunction">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestSearchFunction -->
+      <class name="testcases.TestUserRegistration">
+        <methods>
+          <include name="takeScreenShot"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserRegistration -->
+      <class name="testcases.TestUserLogin">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserLogin -->
+      <class name="testcases.TestGiftCart">
+        <methods>
+          <include name="browserLauncher"/>
+          <include name="apply_discount_code_test"/>
+        </methods>
+      </class> <!-- testcases.TestGiftCart -->
+      <class name="testcases.TestCheckout">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestCheckout -->
+    </classes>
+  </test> <!-- test4(failed) -->
+  <test name="test5(failed)">
+    <classes>
+      <class name="testcases.TestSearchFunction">
+        <methods>
+          <include name="empty_search_input_test"/>
+          <include name="search_results_test"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestSearchFunction -->
+      <class name="testcases.TestAddToCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestAddToCart -->
+      <class name="testcases.TestUserRegistration">
+        <methods>
+          <include name="takeScreenShot"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserRegistration -->
+      <class name="testcases.TestUserLogin">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserLogin -->
+      <class name="testcases.TestGiftCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestGiftCart -->
+      <class name="testcases.TestCheckout">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestCheckout -->
+    </classes>
+  </test> <!-- test5(failed) -->
+  <test name="test6(failed)">
+    <classes>
+      <class name="testcases.TestAddToCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestAddToCart -->
+      <class name="testcases.TestSearchFunction">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestSearchFunction -->
+      <class name="testcases.TestUserLogin">
+        <methods>
+          <include name="invalid_email_login_test"/>
+          <include name="verify_login_user_page"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserLogin -->
+      <class name="testcases.TestUserRegistration">
+        <methods>
+          <include name="takeScreenShot"/>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestUserRegistration -->
+      <class name="testcases.TestGiftCart">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestGiftCart -->
+      <class name="testcases.TestCheckout">
+        <methods>
+          <include name="browserLauncher"/>
+        </methods>
+      </class> <!-- testcases.TestCheckout -->
+    </classes>
+  </test> <!-- test6(failed) -->
+</suite> <!-- Failed suite [suite] -->
