@@ -26,6 +26,13 @@ public class CartPage {
     @FindBy(css = "button[name='checkout'] span")
     WebElement checkoutButton;
 
+    @FindBy(css = "p[class='empty']")
+    WebElement emptyCartWarning;
+
+    public String cartWarning(){
+        return emptyCartWarning.getText();
+    }
+
 
 
     public void clearCartQuantity(){

@@ -45,6 +45,34 @@ public class CheckoutPage {
     @FindBy(xpath = "//*[@id=\"checkout_submit\"]/span[2]")
     WebElement applyCouponCodeButton;
 
+    @FindBy(id = "checkout_shipping_address_first_name")
+    WebElement firstName;
+
+    @FindBy(id = "checkout_shipping_address_last_name")
+    WebElement lastName;
+
+    @FindBy(id = "checkout_email")
+    WebElement email;
+
+    @FindBy(name = "checkout")
+    WebElement checkOutBtn;
+
+    public void clickCheckOutBtn(){
+        checkOutBtn.click();
+    }
+
+    public void enterEmail(String emailAddress) {
+        email.sendKeys(emailAddress);
+    }
+
+    public void enterFirstName(String fName) {
+        firstName.sendKeys(fName);
+    }
+
+    public void enterLastName(String lName) {
+        lastName.sendKeys(lName);
+    }
+
     public void enterCouponCode(String code){
         coupon.sendKeys(code);
     }

@@ -15,11 +15,11 @@ public class ItemDescriptionPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "label[for='val232536788178500']")
+    @FindBy(xpath = "//label[text()='US 4.5']")
     WebElement size;
 
 
-    @FindBy(css = "label[for='val23253678817851-0']")
+    @FindBy(xpath = "//*[@id=\"bcpo-select-option-1\"]/div[1]/label")
     WebElement colorBlack;
 
     @FindBy(css= "input[value='Add to cart']")
@@ -31,8 +31,15 @@ public class ItemDescriptionPage {
     @FindBy(css = "a[class='cart-count navigable'] span[class='cart-count-text']")
     WebElement cartButton;
 
-    @FindBy(xpath = "1")
+    @FindBy(xpath = "//*[@id=\"shopify-section-header\"]/section/header/div[1]/div/div[2]/div[2]/a/span[2]")
     WebElement cartCountNumber;
+
+    @FindBy(css = ".checkout-link.navigable")
+    WebElement checkoutNavButton;
+
+    public void clickCheckoutNavButton(){
+        checkoutNavButton.click();
+    }
 
     public String getCartCountNumber(){
         return driver.findElement((By) cartCountNumber).getText();

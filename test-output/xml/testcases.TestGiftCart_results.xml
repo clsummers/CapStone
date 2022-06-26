@@ -4,14 +4,14 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="22.488">
+           time="21.168">
     <properties></properties>
 
 
 
-            <testcase>
+            <testcase
                 name="apply_discount_code_test"
-                time="22.488"
+                time="21.168"
                 classname="testcases.TestGiftCart">
             </testcase>
 </testsuite>

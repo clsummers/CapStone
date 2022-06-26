@@ -1,6 +1,5 @@
 package testcases;
 
-import library.Screenshots;
 import library.SelectBrowser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,23 +10,31 @@ import pages.*;
 
 import java.time.Duration;
 
-public class TestAddToCart {
+
+/*
+* ==========================================================================================
+* TestAddToCart tests will make sure that items can be added and removed from the users cart
+* ==========================================================================================
+*
+* */
+
+public class TestAddToCart extends Base {
 
     WebDriver driver;
     MainPage mainPage;
-    AccountPage accountPage;
-    SignUpPage signUpPage;
-    LoginPage loginPage;
     ClearancePage clearancePage;
     ItemDescriptionPage itemDescriptionPage;
     CartPage cartPage;
-    Screenshots screenshots;
 
 
 
+/*
+* browserLauncher starts up the browser at the beginning of each test and adds an implicit wait.
+*
+* */
     @BeforeTest
     public void browserLauncher()    {
-        driver = SelectBrowser.StartBrowser("Chrome");
+        driver = SelectBrowser.StartBrowser("EdgeExplore");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.get("https://www.alexandnova.com/");
     }
@@ -45,7 +52,7 @@ public class TestAddToCart {
 //        String actualResult = clearancePage.verifyPrice();
 //        Assert.assertEquals(expectedResult, actualResult);
         //Add assertion: Verify the prices must show up for products on the product page
-        if(driver.findElement(By.className("money")).isDisplayed()) {
+        if(driver.findElement(By.cssSelector(".product-price-minimum.money.notranslate")).isDisplayed()) {
             System.out.println("The product price is displayed");
         }else {
             System.out.println("The product price is not visible..");
@@ -141,19 +148,24 @@ public class TestAddToCart {
         itemDescriptionPage.selectSize();
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
-        itemDescriptionPage.goToCart();
+        //itemDescriptionPage.goToCart();
         //add assertion to show products and cart match up
+        if(driver.findElement(By.className("product-option-quantity")).equals(By.className("cart-count-number"))) {
+            System.out.println("Products and the cart matches up!");
+        }else {
+            System.out.println("The products and cart do not match up...");
+        }
 
 
     }
 
     //Remove Product from cart: Verify that the Product should be removed from the cart and the Cart icon should show 0 items.
-    @Test(priority = 6)
+    @Test(priority = 6) //Not yet working
     public void remove_product_from_cart_test() throws InterruptedException {
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
         clearancePage.selectItem();
         itemDescriptionPage = new ItemDescriptionPage(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -161,17 +173,16 @@ public class TestAddToCart {
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
         itemDescriptionPage.goToCart();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Thread.sleep(3000);
         cartPage = new CartPage(driver);
         cartPage.clearCartQuantity();
+        cartPage.changeQuantity("0");
         cartPage.clickUpdateCartButton();
+        Thread.sleep(3000);
+        String expected = "You don't have any items in your cart yet. Continue shopping .";
+        String actual = cartPage.cartWarning();
+        Assert.assertEquals(expected, actual);
 
-
-        if(driver.findElement(By.className("empty")).isDisplayed()) {
-            System.out.println("Product has been added to the cart page!");
-        }else {
-            System.out.println("The item has not been added..");
-        }
 
 
     }

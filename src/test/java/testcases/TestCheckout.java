@@ -2,6 +2,7 @@ package testcases;
 
 import library.SelectBrowser;
 import org.apache.commons.logging.Log;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -10,21 +11,26 @@ import pages.*;
 
 import java.time.Duration;
 
+/*============================================================================================
+* TestCheckout tests out different payment methods and instances of valid/invalid credit cards.
+* ============================================================================================
+* */
+
 public class TestCheckout {
 
     WebDriver driver;
     MainPage mainPage;
     ClearancePage clearancePage;
     ItemDescriptionPage itemDescriptionPage;
-    CartPage cartPage;
     CheckoutPage checkoutPage;
-    LoginPage loginPage;
-    AccountPage accountPage;
-    SearchResultPage searchResultPage;
     CheckoutShippingPage checkoutShippingPage;
     CheckoutPaymentPage checkoutPaymentPage;
 
 
+    /*==============================================================================================
+     * browserLauncher starts up the browser at the beginning of each test and adds an implicit wait.
+     *==============================================================================================
+     * */
     @BeforeTest
     public void browserLauncher() {
         driver = SelectBrowser.StartBrowser("Chrome");
@@ -32,174 +38,145 @@ public class TestCheckout {
         driver.get("https://www.alexandnova.com/");
     }
 
-    //Credit Card (Visa/Master)
-    //Debit Card (Visa/MasterCard/Maestro)
-    //Paid by Paypal
-    //Paid by shop pay
-    //Paid by zip
+
+    /*=======================================================================================================================================
+    * tc0017_different_payment_mode_test tests that different forms of payment (i.e. credit card, PayPal, Shop Pay) are available at checkout.
+    * =======================================================================================================================================
+    * */
     @Test(priority = 1)
-    public void master_card_payment_test() throws InterruptedException {
+    public void tc0017_different_payment_mode_test() throws InterruptedException {
+
         mainPage = new MainPage(driver);
-        mainPage.clickOnAccountLink();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        loginPage = new LoginPage(driver);
-        loginPage.inputEmail("test@gmail.com");
-        loginPage.inputPassword("P@ssword");
-        loginPage.clickLoginButton();
-        Thread.sleep(20000);
-        // build login.clearance
-        loginPage.clickClearanceButton();
+        mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
         clearancePage.selectItem();
-        Thread.sleep(20000);
         itemDescriptionPage = new ItemDescriptionPage(driver);
+        Thread.sleep(3000);
         itemDescriptionPage.selectSize();
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
-        itemDescriptionPage.goToCart();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        cartPage = new CartPage(driver);
-        cartPage.clickOnCheckoutButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Thread.sleep(3000);
+        itemDescriptionPage.clickCheckoutNavButton();
         checkoutPage = new CheckoutPage(driver);
-        checkoutPage.inputAddress("123 address road");
+        checkoutPage.enterEmail("test@gmail.com");
+        checkoutPage.enterFirstName("John");
+        checkoutPage.enterLastName("Fink");
+        Thread.sleep(3000);
+        checkoutPage.inputAddress("123 Street");
         checkoutPage.inputCity("Austin");
         checkoutPage.inputZip("75781");
         checkoutPage.clickContinueToShipping();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Thread.sleep(3000);
         checkoutShippingPage = new CheckoutShippingPage(driver);
         checkoutShippingPage.clickOnContinueToPaymentButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         checkoutPaymentPage = new CheckoutPaymentPage(driver);
-        //add assertion: Master Card
-        Thread.sleep(20000);
-        String expected = "Master Card";
-        String actual = checkoutPaymentPage.checkForMasterCard();
-        Assert.assertEquals(expected, actual);
+        Thread.sleep(3000);
+        //credit card assertion
+        String creditActual = "Credit card";
+        String creditExpected = checkoutPaymentPage.verifyCreditCardOption();
+        Assert.assertTrue(creditExpected.contains(creditActual));
+        //Shop pay assertion
+        String shopActual = "Shop Pay";
+        String shopExpected = checkoutPaymentPage.verifyShopPayOption();
+        Assert.assertEquals(shopActual, shopExpected);
+        //PayPal assertion
+        String payActual = "PayPal";
+        String payExpected = checkoutPaymentPage.verifyPayPalOption();
+        Assert.assertEquals(payActual, payExpected);
 
 
     }
 
-    @Test(priority = 2)
-    public void visa_card_payment_test() throws InterruptedException {
+
+    /*=======================================================================================================================================================================
+    * tc0018_invalid_card_payment_test tests the check-out process by leaving any mandatory field blank in the creditcard payment information and shipping or billing address.
+    * ========================================================================================================================================================================
+    * */
+    @Test(priority = 18)
+    public void tc0018_invalid_card_payment_test() throws InterruptedException {
         mainPage = new MainPage(driver);
-        mainPage.clickOnAccountLink();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        loginPage = new LoginPage(driver);
-        loginPage.inputEmail("test@gmail.com");
-        loginPage.inputPassword("P@ssword");
-        loginPage.clickLoginButton();
-        Thread.sleep(20000);
-        // build login.clearance
-        loginPage.clickClearanceButton();
+        mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
         clearancePage.selectItem();
-        Thread.sleep(20000);
         itemDescriptionPage = new ItemDescriptionPage(driver);
+        Thread.sleep(3000);
         itemDescriptionPage.selectSize();
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
+        Thread.sleep(3000);
         itemDescriptionPage.goToCart();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        cartPage = new CartPage(driver);
-        cartPage.clickOnCheckoutButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         checkoutPage = new CheckoutPage(driver);
-        checkoutPage.inputAddress("123 address road");
+        checkoutPage.clickCheckOutBtn();
+        checkoutPage.enterEmail("test@gmail.com");
+        checkoutPage.enterFirstName("John");
+        checkoutPage.enterLastName("Fink");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        checkoutPage.inputAddress("123 Street");
         checkoutPage.inputCity("Austin");
         checkoutPage.inputZip("75781");
         checkoutPage.clickContinueToShipping();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Thread.sleep(3000);
         checkoutShippingPage = new CheckoutShippingPage(driver);
         checkoutShippingPage.clickOnContinueToPaymentButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         checkoutPaymentPage = new CheckoutPaymentPage(driver);
-        //add assertion: Master Card
-        Thread.sleep(20000);
-        String expected = "Visa";
-        String actual = checkoutPaymentPage.checkForVisa();
+        Thread.sleep(3000);
+        checkoutPaymentPage.switchToCardNumberFrame();
+        checkoutPaymentPage.enterCardNumber("12345678");
+        checkoutPaymentPage.switchToParentFrame();
+        checkoutPaymentPage.switchToNameFrame();
+        checkoutPaymentPage.enterName("John Fink");
+        checkoutPaymentPage.switchToParentFrame();
+        checkoutPaymentPage.switchToDateFrame();
+        checkoutPaymentPage.enterExpirationDate("06");
+        checkoutPaymentPage.enterExpirationDate("2005");
+        checkoutPaymentPage.switchToParentFrame();
+        checkoutPaymentPage.clickPayNow();
+        //Assertion
+        String actual = "Your payment details couldn’t be verified. Check your card details and try again.";
+        String expected = checkoutPaymentPage.showPaymentError();
         Assert.assertEquals(expected, actual);
+
     }
 
-    @Test(priority = 3)
-    public void paypal_payment_test() throws InterruptedException {
+
+    /*======================================================================================
+    * tc0019_payment_details_test tests that the payment button exists on the checkout page.
+    * ======================================================================================
+    * */
+    @Test(priority = 19)
+    public void tc0019_payment_details_test() throws InterruptedException {
         mainPage = new MainPage(driver);
-        mainPage.clickOnAccountLink();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        loginPage = new LoginPage(driver);
-        loginPage.inputEmail("test@gmail.com");
-        loginPage.inputPassword("P@ssword");
-        loginPage.clickLoginButton();
-        Thread.sleep(20000);
-        // build login.clearance
-        loginPage.clickClearanceButton();
+        mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
         clearancePage.selectItem();
-        Thread.sleep(20000);
         itemDescriptionPage = new ItemDescriptionPage(driver);
+        Thread.sleep(3000);
         itemDescriptionPage.selectSize();
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
+        Thread.sleep(3000);
         itemDescriptionPage.goToCart();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        cartPage = new CartPage(driver);
-        cartPage.clickOnCheckoutButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         checkoutPage = new CheckoutPage(driver);
-        checkoutPage.inputAddress("123 address road");
+        checkoutPage.clickCheckOutBtn();
+        checkoutPage.enterEmail("test@gmail.com");
+        checkoutPage.enterFirstName("John");
+        checkoutPage.enterLastName("Fink");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        checkoutPage.inputAddress("123 Street");
         checkoutPage.inputCity("Austin");
         checkoutPage.inputZip("75781");
         checkoutPage.clickContinueToShipping();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Thread.sleep(3000);
         checkoutShippingPage = new CheckoutShippingPage(driver);
         checkoutShippingPage.clickOnContinueToPaymentButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         checkoutPaymentPage = new CheckoutPaymentPage(driver);
-        //add assertion: Master Card
-        Thread.sleep(20000);
-        String expected = "PayPal";
-        String actual = checkoutPaymentPage.checkForPayPal();
-        Assert.assertEquals(expected, actual);
+        Thread.sleep(3000);
+        if(driver.findElement(By.xpath("//*[@id=\\\"continue_button\\\"]/span")).isDisplayed()) {
+            System.out.println("Payment button exists on checkout page!");
+        }else {
+            System.out.println("Payment button does not exist on checkout page..");
+        }
+
     }
 
-    @Test(priority = 4)
-    public void shop_pay_payment_test() throws InterruptedException {
-        mainPage = new MainPage(driver);
-        mainPage.clickOnAccountLink();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        loginPage = new LoginPage(driver);
-        loginPage.inputEmail("test@gmail.com");
-        loginPage.inputPassword("P@ssword");
-        loginPage.clickLoginButton();
-        Thread.sleep(20000);
-        // build login.clearance
-        loginPage.clickClearanceButton();
-        clearancePage = new ClearancePage(driver);
-        clearancePage.selectItem();
-        Thread.sleep(20000);
-        itemDescriptionPage = new ItemDescriptionPage(driver);
-        itemDescriptionPage.selectSize();
-        itemDescriptionPage.selectColor();
-        itemDescriptionPage.clickAddToCart();
-        itemDescriptionPage.goToCart();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        cartPage = new CartPage(driver);
-        cartPage.clickOnCheckoutButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        checkoutPage = new CheckoutPage(driver);
-        checkoutPage.inputAddress("123 address road");
-        checkoutPage.inputCity("Austin");
-        checkoutPage.inputZip("75781");
-        checkoutPage.clickContinueToShipping();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        checkoutShippingPage = new CheckoutShippingPage(driver);
-        checkoutShippingPage.clickOnContinueToPaymentButton();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        checkoutPaymentPage = new CheckoutPaymentPage(driver);
-        //add assertion: Master Card
-        Thread.sleep(20000);
-        String expected = "Shop Pay";
-        String actual = checkoutPaymentPage.checkForShopPay();
-        Assert.assertEquals(expected, actual);
-    }
 }
