@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Summers_Collin_Capstone_CaseStudy"
-           tests="1"
+<testsuite name="test6"
+           tests="2"
            failures="0"
            errors="0"
            skipped="0"
-           time="14.273">
+           time="53.547">
     <properties></properties>
 
 
 
             <testcase
-                name="verify_login_user_page"
-                time="14.273"
+                name="tc0006_verify_login_user_page"
+                time="26.262"
+                classname="testcases.TestUserLogin">
+            </testcase>
+            <testcase
+                name="tc0007_invalid_email_login_test"
+                time="27.285"
                 classname="testcases.TestUserLogin">
             </testcase>
 </testsuite>

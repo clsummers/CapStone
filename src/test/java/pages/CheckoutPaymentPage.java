@@ -59,7 +59,7 @@ public class CheckoutPaymentPage {
     }
 
     public String verifyShopPayOption(){
-        return paymentPayPal.getText();
+        return paymentShopPay.getText();
     }
 
     public String verifyPayPalOption(){

@@ -4,6 +4,7 @@ import library.SelectBrowser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.AccountPage;
@@ -24,7 +25,7 @@ import java.time.Duration;
 */
 public class TestUserRegistration extends Base{
 
-    WebDriver driver;
+
     MainPage mainPage;
     AccountPage accountPage;
     SignUpPage signUpPage;
@@ -35,7 +36,7 @@ public class TestUserRegistration extends Base{
      * browserLauncher starts up the browser at the beginning of each test and adds an implicit wait.
      *================================================================================================
      * */
-    @BeforeTest
+    @BeforeMethod
     public void browserLauncher()
     {
         driver = SelectBrowser.StartBrowser("Chrome");
@@ -79,7 +80,7 @@ public class TestUserRegistration extends Base{
         signUpPage.inputEmail("testABC@perscholas.com");
         signUpPage.inputPassword("P@ssword");
         signUpPage.clickRegisterButton();
-
+        Thread.sleep(30000);
         //Verify that a Welcome message is displayed to the user.
         if(driver.findElement(By.className("page-title")).isDisplayed()) {
             System.out.println("Welcome message is displayed!");
@@ -107,7 +108,7 @@ public class TestUserRegistration extends Base{
         signUpPage.inputEmail("testABCperscholas.com");
         signUpPage.inputPassword("P@ssword");
         signUpPage.clickRegisterButton();
-        Thread.sleep(2000);
+        Thread.sleep(20000);
         loginPage = new LoginPage(driver);
         String expected = "Sorry! Please try that again.";
         String actual = loginPage.getAlertText();
@@ -119,25 +120,25 @@ public class TestUserRegistration extends Base{
     * tc0004_email_validation_random_string_test checks the email text field that has an Email address without @ symbol.
     * ==================================================================================================================
     * */
-    @Test(priority = 3)
-    public void tc0003_email_validation_random_string_test() throws InterruptedException {
-        mainPage = new MainPage(driver);
-        mainPage.clickOnAccountLink();
-        accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        accountPage.clickOnRegisterButton();
-        signUpPage = new SignUpPage(driver);
-        signUpPage.inputFirstName("Fink");
-        signUpPage.inputLastName("John");
-        signUpPage.inputEmail("emailemailemail");
-        signUpPage.inputPassword("P@ssword");
-        signUpPage.clickRegisterButton();
-        Thread.sleep(10000);
-        loginPage = new LoginPage(driver);
-        String expected = "Sorry! Please try that again.";
-        String actual = loginPage.getAlertText();
-        Assert.assertEquals(expected, actual);
-    }
+//    @Test(priority = 4)
+//    public void tc0003_email_validation_random_string_test() throws InterruptedException {
+//        mainPage = new MainPage(driver);
+//        mainPage.clickOnAccountLink();
+//        accountPage = new AccountPage(driver);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        accountPage.clickOnRegisterButton();
+//        signUpPage = new SignUpPage(driver);
+//        signUpPage.inputFirstName("Fink");
+//        signUpPage.inputLastName("John");
+//        signUpPage.inputEmail("emailemailemail");
+//        signUpPage.inputPassword("P@ssword");
+//        signUpPage.clickRegisterButton();
+//        Thread.sleep(10000);
+//        loginPage = new LoginPage(driver);
+//        String expected = "Sorry! Please try that again.";
+//        String actual = loginPage.getAlertText();
+//        Assert.assertEquals(expected, actual);
+//    }
 
 
 
@@ -145,25 +146,25 @@ public class TestUserRegistration extends Base{
     * tc0005_email_validation_written_at_test checks the email text field that has @ symbol written in words.
     * =======================================================================================================
     * */
-    @Test(priority = 3)
-    public void tc0003_email_validation_written_at_test() throws InterruptedException {
-        mainPage = new MainPage(driver);
-        mainPage.clickOnAccountLink();
-        accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        accountPage.clickOnRegisterButton();
-        signUpPage = new SignUpPage(driver);
-        signUpPage.inputFirstName("Fink");
-        signUpPage.inputLastName("John");
-        signUpPage.inputEmail("testABCatperscholas.com");
-        signUpPage.inputPassword("P@ssword");
-        signUpPage.clickRegisterButton();
-        Thread.sleep(10000);
-        loginPage = new LoginPage(driver);
-        String expected = "Sorry! Please try that again.";
-        String actual = loginPage.getAlertText();
-        Assert.assertEquals(expected, actual);
-    }
+//    @Test(priority = 5)
+//    public void tc0003_email_validation_written_at_test() throws InterruptedException {
+//        mainPage = new MainPage(driver);
+//        mainPage.clickOnAccountLink();
+//        accountPage = new AccountPage(driver);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//        accountPage.clickOnRegisterButton();
+//        signUpPage = new SignUpPage(driver);
+//        signUpPage.inputFirstName("Fink");
+//        signUpPage.inputLastName("John");
+//        signUpPage.inputEmail("testABCatperscholas.com");
+//        signUpPage.inputPassword("P@ssword");
+//        signUpPage.clickRegisterButton();
+//        Thread.sleep(10000);
+//        loginPage = new LoginPage(driver);
+//        String expected = "Sorry! Please try that again.";
+//        String actual = loginPage.getAlertText();
+//        Assert.assertEquals(expected, actual);
+//    }
 
 
 
@@ -171,25 +172,25 @@ public class TestUserRegistration extends Base{
     * tc0006_email_validation_missing_period_test checks the email text field that has a missing dot in the email address.
     * ====================================================================================================================
     * */
-    @Test(priority = 3)
-    public void tc0003_email_validation_missing_period_test() throws InterruptedException {
-        mainPage = new MainPage(driver);
-        mainPage.clickOnAccountLink();
-        accountPage = new AccountPage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        accountPage.clickOnRegisterButton();
-        signUpPage = new SignUpPage(driver);
-        signUpPage.inputFirstName("Fink");
-        signUpPage.inputLastName("John");
-        signUpPage.inputEmail("testABC@perscholascom");
-        signUpPage.inputPassword("P@ssword");
-        signUpPage.clickRegisterButton();
-        Thread.sleep(10000);
-        loginPage = new LoginPage(driver);
-        String expected = "Sorry! Please try that again.";
-        String actual = loginPage.getAlertText();
-        Assert.assertEquals(expected, actual);
-    }
+//    @Test(priority = 3)
+//    public void tc0003_email_validation_missing_period_test() throws InterruptedException {
+//        mainPage = new MainPage(driver);
+//        mainPage.clickOnAccountLink();
+//        accountPage = new AccountPage(driver);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        accountPage.clickOnRegisterButton();
+//        signUpPage = new SignUpPage(driver);
+//        signUpPage.inputFirstName("Fink");
+//        signUpPage.inputLastName("John");
+//        signUpPage.inputEmail("testABC@perscholascom");
+//        signUpPage.inputPassword("P@ssword");
+//        signUpPage.clickRegisterButton();
+//        Thread.sleep(10000);
+//        loginPage = new LoginPage(driver);
+//        String expected = "Sorry! Please try that again.";
+//        String actual = loginPage.getAlertText();
+//        Assert.assertEquals(expected, actual);
+//    }
 
 
 
@@ -206,7 +207,7 @@ public class TestUserRegistration extends Base{
         accountPage.clickOnRegisterButton();
         signUpPage = new SignUpPage(driver);
         signUpPage.clickRegisterButton();
-        Thread.sleep(10000);
+        Thread.sleep(20000);
         loginPage = new LoginPage(driver);
         String expected = "Sorry! Please try that again.";
         String actual = loginPage.getAlertText();
@@ -233,7 +234,7 @@ public class TestUserRegistration extends Base{
         signUpPage.inputEmail("testABC@perscholascom");
         signUpPage.inputPassword("passw");
         signUpPage.clickRegisterButton();
-        Thread.sleep(10000);
+        Thread.sleep(20000);
         loginPage = new LoginPage(driver);
         String expected = "Sorry! Please try that again.";
         String actual = loginPage.getAlertText();

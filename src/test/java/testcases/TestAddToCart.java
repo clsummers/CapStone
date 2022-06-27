@@ -4,6 +4,7 @@ import library.SelectBrowser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
@@ -19,7 +20,7 @@ import java.time.Duration;
 * */
 public class TestAddToCart extends Base  {
 
-    WebDriver driver;
+
     MainPage mainPage;
     ClearancePage clearancePage;
     ItemDescriptionPage itemDescriptionPage;
@@ -30,9 +31,9 @@ public class TestAddToCart extends Base  {
 * browserLauncher starts up the browser at the beginning of each test and adds an implicit wait.
 *================================================================================================
 * */
-    @BeforeTest
+    @BeforeMethod
     public void browserLauncher()    {
-        driver = SelectBrowser.StartBrowser("EdgeExplore");
+        driver = SelectBrowser.StartBrowser("Chrome");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.get("https://www.alexandnova.com/");
     }
@@ -42,7 +43,7 @@ public class TestAddToCart extends Base  {
     * tc0010_verify_product_display_price_test will verify that the prices show up for products on the product page.
     * ===============================================================================================================
     * */
-    @Test(priority = 1)
+    @Test(priority = 10)
     public void tc0010_verify_product_display_price_test(){
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();

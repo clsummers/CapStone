@@ -17,6 +17,9 @@ public class CartPage {
     @FindBy(name = "updates[]")
     WebElement cartQuantity;
 
+    @FindBy(css = ".remove")
+    WebElement clearButton;
+
     @FindBy(css = "input[value='Update Cart']")
     WebElement updateCartButton;
 
@@ -29,12 +32,13 @@ public class CartPage {
     @FindBy(css = "p[class='empty']")
     WebElement emptyCartWarning;
 
+
     public String cartWarning(){
         return emptyCartWarning.getText();
     }
 
     public void clearCartQuantity(){
-        cartQuantity.clear();
+        clearButton.click();
     }
 
     public void changeQuantity(String quantity){

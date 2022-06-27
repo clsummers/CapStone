@@ -29,14 +29,15 @@ public class LoginPage {
     @FindBy(xpath = "//h1[normalize-space()='Welcome, john']")
     WebElement welcomeMessage;
 
-    By tryAgainAlert = By.cssSelector(".error-message.banner");
+    @FindBy(css = ".error-message.banner")
+    WebElement tryAgainAlert;
 
     public String getAlertText(){
-        return driver.findElement(tryAgainAlert).getText();
+        return tryAgainAlert.getText();
     }
 
     public String getWelcomeMessage(){
-        return driver.findElement((By) welcomeMessage).getText();
+        return welcomeMessage.getText();
     }
 
     public void inputEmail(String emailInput){

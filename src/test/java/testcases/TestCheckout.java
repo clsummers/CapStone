@@ -5,6 +5,7 @@ import org.apache.commons.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
@@ -18,7 +19,7 @@ import java.time.Duration;
 
 public class TestCheckout extends Base{
 
-    WebDriver driver;
+
     MainPage mainPage;
     ClearancePage clearancePage;
     ItemDescriptionPage itemDescriptionPage;
@@ -31,7 +32,7 @@ public class TestCheckout extends Base{
      * browserLauncher starts up the browser at the beginning of each test and adds an implicit wait.
      *==============================================================================================
      * */
-    @BeforeTest
+    @BeforeMethod
     public void browserLauncher() {
         driver = SelectBrowser.StartBrowser("Chrome");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -58,10 +59,11 @@ public class TestCheckout extends Base{
         Thread.sleep(3000);
         itemDescriptionPage.clickCheckoutNavButton();
         checkoutPage = new CheckoutPage(driver);
-        checkoutPage.enterEmail("test@gmail.com");
+        checkoutPage.enterEmail("testedc@gmail.com");
         checkoutPage.enterFirstName("John");
+        Thread.sleep(1000);
         checkoutPage.enterLastName("Fink");
-        Thread.sleep(3000);
+
         checkoutPage.inputAddress("123 Street");
         checkoutPage.inputCity("Austin");
         checkoutPage.inputZip("75781");
@@ -72,6 +74,7 @@ public class TestCheckout extends Base{
         checkoutPaymentPage = new CheckoutPaymentPage(driver);
         Thread.sleep(3000);
         //credit card assertion
+
         String creditActual = "Credit card";
         String creditExpected = checkoutPaymentPage.verifyCreditCardOption();
         Assert.assertTrue(creditExpected.contains(creditActual));
@@ -107,7 +110,7 @@ public class TestCheckout extends Base{
         itemDescriptionPage.goToCart();
         checkoutPage = new CheckoutPage(driver);
         checkoutPage.clickCheckOutBtn();
-        checkoutPage.enterEmail("test@gmail.com");
+        checkoutPage.enterEmail("testfasdf@gmail.com");
         checkoutPage.enterFirstName("John");
         checkoutPage.enterLastName("Fink");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -158,7 +161,7 @@ public class TestCheckout extends Base{
         itemDescriptionPage.goToCart();
         checkoutPage = new CheckoutPage(driver);
         checkoutPage.clickCheckOutBtn();
-        checkoutPage.enterEmail("test@gmail.com");
+        checkoutPage.enterEmail("testfasdf@gmail.com");
         checkoutPage.enterFirstName("John");
         checkoutPage.enterLastName("Fink");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -168,15 +171,43 @@ public class TestCheckout extends Base{
         checkoutPage.clickContinueToShipping();
         Thread.sleep(3000);
         checkoutShippingPage = new CheckoutShippingPage(driver);
-        checkoutShippingPage.clickOnContinueToPaymentButton();
-        checkoutPaymentPage = new CheckoutPaymentPage(driver);
-        Thread.sleep(3000);
-        if(driver.findElement(By.xpath("//*[@id=\\\"continue_button\\\"]/span")).isDisplayed()) {
-            System.out.println("Payment button exists on checkout page!");
-        }else {
-            System.out.println("Payment button does not exist on checkout page..");
-        }
 
+        checkoutShippingPage.clickOnContinueToPaymentButton();
+        Thread.sleep(3000);
+        checkoutPaymentPage = new CheckoutPaymentPage(driver);
+        checkoutPaymentPage.switchToCardNumberFrame();
+        checkoutPaymentPage.enterCardNumber("3698");
+        checkoutPaymentPage.enterCardNumber("5214");
+        checkoutPaymentPage.enterCardNumber("769");
+        checkoutPaymentPage.enterCardNumber("874");
+        checkoutPaymentPage.switchToParentFrame();
+        checkoutPaymentPage.switchToNameFrame();
+        checkoutPaymentPage.enterName("John Fink");
+        checkoutPaymentPage.switchToParentFrame();
+        checkoutPaymentPage.switchToDateFrame();
+        checkoutPaymentPage.enterExpirationDate("08");
+        checkoutPaymentPage.enterExpirationDate("2024");
+        checkoutPaymentPage.switchToParentFrame();
+        checkoutPaymentPage.switchToCodeFrame();
+        checkoutPaymentPage.enterSecurityCode("567");
+        checkoutPaymentPage.switchToParentFrame();
+        checkoutPaymentPage.clickPayNow();
+
+        String actual = "Your payment details couldn’t be verified. Check your card details and try again.";
+        String expected = checkoutPaymentPage.showPaymentError();
+        Assert.assertEquals(expected, actual);
+
+
+
+
+
+
+//        if(driver.findElement(By.xpath("//*[@id=\\\"continue_button\\\"]/span")).isDisplayed()) {
+//            System.out.println("Payment button exists on checkout page!");
+//        }else {
+//            System.out.println("Payment button does not exist on checkout page..");
+//        }
+//
     }
 
 }

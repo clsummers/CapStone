@@ -30,8 +30,6 @@ public class CheckoutPage {
     @FindBy(id = "continue_button")
     WebElement continueToShippingButton;
 
-    @FindBy(partialLinkText = "Gift card or discount code")
-    WebElement discountCode;
 
     @FindBy(id = "checkout_reduction_code")
     WebElement coupon;
@@ -39,8 +37,6 @@ public class CheckoutPage {
     @FindBy(css = "tbody tr[class='total-line total-line--reduction '] th[class='total-line__name'] span:nth-child(1)")
     WebElement discount;
 
-    @FindBy(xpath = "//*[@id=\"checkout_submit\"]/span[2]")
-    WebElement applyCouponCodeButton;
 
     @FindBy(id = "checkout_shipping_address_first_name")
     WebElement firstName;
@@ -78,17 +74,7 @@ public class CheckoutPage {
         return discount.getText();
     }
 
-    public void clickApplyCouponCode(){
-        applyCouponCodeButton.click();
-    }
 
-    public String verifyDiscountCode(){
-        return driver.findElement((By) discountCode).getText();
-    }
-
-    public void enterDiscountCode(String code){
-        discountCode.sendKeys(code);
-    }
 
     public void clickOnApplyButton(){
         applyButton.click();

@@ -30,8 +30,9 @@ public class MainPage {
     WebElement clearance;
 
     public void clickOnAccountLink() {
-        WebElement accountButton = driver.findElements(By.xpath("//a[@id='customer_login_link']")).get(0);
-        (accountButton).click();
+//        WebElement accountButton = driver.findElements(By.xpath("//a[@id='customer_login_link']")).get(0);
+//        (accountButton).click();
+        accountButton.click();
     }
     public void inputSearch(String search){
         searchBar.sendKeys(search);

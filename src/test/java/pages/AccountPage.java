@@ -19,7 +19,7 @@ public class AccountPage {
     }
 
 
-    @FindBy(css = ".button.secondary.navigable[href='/account/register']")
+    @FindBy(xpath = "//*[@id=\"keyboard-nav-3\"]/div[2]/div[3]/a")
     WebElement registerButton;
 
     @FindBy(id = "ispbxii_1")

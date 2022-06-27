@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Summers_Collin_Capstone_CaseStudy"
+<testsuite name="test4"
            tests="1"
            failures="0"
            errors="0"
            skipped="0"
-           time="21.168">
+           time="25.657">
     <properties></properties>
 
 
 
             <testcase
-                name="apply_discount_code_test"
-                time="21.168"
+                name="tc0016_apply_discount_code_test"
+                time="25.657"
                 classname="testcases.TestGiftCart">
             </testcase>
 </testsuite>

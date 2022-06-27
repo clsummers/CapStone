@@ -4,6 +4,7 @@ import library.SelectBrowser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
@@ -17,7 +18,7 @@ import java.time.Duration;
 
 public class TestGiftCart extends Base{
 
-    WebDriver driver;
+
     MainPage mainPage;
     ClearancePage clearancePage;
     ItemDescriptionPage itemDescriptionPage;
@@ -32,7 +33,7 @@ public class TestGiftCart extends Base{
      *===============================================================================================
      * */
 
-    @BeforeTest
+    @BeforeMethod
     public void browserLauncher()    {
         driver = SelectBrowser.StartBrowser("Chrome");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));

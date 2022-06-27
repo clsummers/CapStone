@@ -4,6 +4,7 @@ import library.SelectBrowser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.AccountPage;
@@ -21,7 +22,7 @@ import java.time.Duration;
 * */
 public class TestUserLogin extends Base{
 
-    WebDriver driver;
+
     MainPage mainPage;
     LoginPage loginPage;
 
@@ -29,7 +30,7 @@ public class TestUserLogin extends Base{
      * browserLauncher starts up the browser at the beginning of each test and adds an implicit wait.
      *==============================================================================================
      * */
-  @BeforeTest
+  @BeforeMethod
     public void browserLauncher()
     {
         driver = SelectBrowser.StartBrowser("Chrome");
