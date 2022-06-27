@@ -14,10 +14,8 @@ public class ItemDescriptionPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
     @FindBy(xpath = "//label[text()='US 4.5']")
     WebElement size;
-
 
     @FindBy(xpath = "//*[@id=\"bcpo-select-option-1\"]/div[1]/label")
     WebElement colorBlack;
@@ -45,7 +43,6 @@ public class ItemDescriptionPage {
         return driver.findElement((By) cartCountNumber).getText();
     }
 
-
     public void selectSize(){
         size.click();
     }
@@ -69,10 +66,5 @@ public class ItemDescriptionPage {
     public void changeQuantity(String quantity){
         itemQuantity.sendKeys(quantity);
     }
-
-
-
-
-
 
 }

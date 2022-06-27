@@ -15,11 +15,9 @@ public class SearchResultPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
     @FindBy(partialLinkText = "baby shoes")
     WebElement searchResult;
 
-    //Add assertion: "No results found. Showing top popular products you might want to consider..."
     @FindBy(css = ".isp_no_results_title")
     WebElement noResultsFoundMessage;
 

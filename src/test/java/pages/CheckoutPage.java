@@ -15,9 +15,6 @@ public class CheckoutPage {
         PageFactory.initElements(driver, this);
     }
 
-//    @FindBy(id = "checkout_reduction_code")
-//    WebElement discountCode;
-
     @FindBy(id = "checkout_submit")
     WebElement applyButton;
 
@@ -85,11 +82,9 @@ public class CheckoutPage {
         applyCouponCodeButton.click();
     }
 
-
     public String verifyDiscountCode(){
         return driver.findElement((By) discountCode).getText();
     }
-
 
     public void enterDiscountCode(String code){
         discountCode.sendKeys(code);

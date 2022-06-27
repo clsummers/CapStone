@@ -44,9 +44,6 @@ public class TestSearchFunction {
         mainPage.clickSearchButton();
         searchResultPage = new SearchResultPage(driver);
         Thread.sleep(20000);
-//        String expectedResult = "baby shoes";
-//        String actualResult = searchResultPage.getSearchResult();
-//        Assert.assertEquals(expectedResult, actualResult);
         if(driver.findElement(By.className("isp_title_search_term")).isDisplayed()) {
             System.out.println("Search results are verified");
         }else {

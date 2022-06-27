@@ -13,10 +13,8 @@ public class CheckoutShippingPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
     @FindBy(id = "continue_button")
     WebElement continueToPaymentButton;
-
 
     public void clickOnContinueToPaymentButton(){
         continueToPaymentButton.click();

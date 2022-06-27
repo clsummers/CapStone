@@ -6,6 +6,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.google.common.io.Files;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.nio.file.Files;
+
 
 /*==============================================================================================
 * Incorporates creating html reports, taking and filing screenshots, and tearing down the tests.
@@ -34,7 +35,7 @@ public class Base {
 * =============*/
     @BeforeSuite
     public void buildReport(){
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/HTMLReport.html");
         extentReports = new ExtentReports();
 
         extentReports.attachReporter(htmlReporter);

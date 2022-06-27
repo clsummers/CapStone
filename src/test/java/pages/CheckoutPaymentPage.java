@@ -17,7 +17,6 @@ public class CheckoutPaymentPage {
         PageFactory.initElements(driver, this);
     }
 
-    //Credit Card (Visa/Master)
     @FindBy(css = ".radio-wrapper.content-box__row[data-gateway-group='direct'][data-gateway-name='credit_card']")
     WebElement paymentCreditCard;
 
@@ -26,8 +25,6 @@ public class CheckoutPaymentPage {
 
     @FindBy(css = ".radio-wrapper.content-box__row[data-gateway-group='express']")
     WebElement paymentPayPal;
-
-
 
     @FindBy(className = "card-fields-iframe")
     WebElement cardNumberFrame;

@@ -15,13 +15,11 @@ public class ClearancePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
     @FindBy(css = "article[id='product-list-item-2325367881785'] div[class='product-list-item-details'] a[class='navigable']")
     WebElement meshShoes;
 
     @FindBy(css = ".product-price")
     WebElement priceOfItem;
-
 
     public String verifyPrice(){
         return driver.findElement((By) priceOfItem).getText();
@@ -30,11 +28,5 @@ public class ClearancePage {
     public void selectItem(){
         meshShoes.click();
     }
-
-
-
-
-
-
 
 }

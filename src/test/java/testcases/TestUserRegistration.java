@@ -22,7 +22,7 @@ import java.time.Duration;
 *========================================================================================================================================
 *
 */
-public class TestUserRegistration extends Base{
+public class TestUserRegistration {
 
     WebDriver driver;
     MainPage mainPage;
@@ -107,7 +107,7 @@ public class TestUserRegistration extends Base{
         signUpPage.inputEmail("testABCperscholas.com");
         signUpPage.inputPassword("P@ssword");
         signUpPage.clickRegisterButton();
-        Thread.sleep(20000);
+        Thread.sleep(2000);
         loginPage = new LoginPage(driver);
         String expected = "Sorry! Please try that again.";
         String actual = loginPage.getAlertText();

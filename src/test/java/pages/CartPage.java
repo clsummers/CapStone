@@ -33,13 +33,10 @@ public class CartPage {
         return emptyCartWarning.getText();
     }
 
-
-
     public void clearCartQuantity(){
         cartQuantity.clear();
     }
 
-    //don't need this
     public void changeQuantity(String quantity){
         cartQuantity.sendKeys(quantity);
     }

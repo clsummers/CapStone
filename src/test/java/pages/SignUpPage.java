@@ -35,7 +35,6 @@ public class SignUpPage {
     public String getTextOfTitle(){
         return signUpTitlePage.getText();
     }
-
     public void inputFirstName(String fName){
         firstName.sendKeys(fName);
     }
@@ -43,15 +42,12 @@ public class SignUpPage {
     public void inputLastName(String lName){
         lastName.sendKeys(lName);
     }
-
     public void inputEmail(String emailInput){
         email.sendKeys(emailInput);
     }
-
     public void inputPassword(String pass){
         password.sendKeys(pass);
     }
-
     public void clickRegisterButton(){
         registerButton.click();
     }

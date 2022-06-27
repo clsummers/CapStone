@@ -43,7 +43,7 @@ public class TestCheckout {
     * tc0017_different_payment_mode_test tests that different forms of payment (i.e. credit card, PayPal, Shop Pay) are available at checkout.
     * =======================================================================================================================================
     * */
-    @Test(priority = 1)
+    @Test(priority = 17)
     public void tc0017_different_payment_mode_test() throws InterruptedException {
 
         mainPage = new MainPage(driver);

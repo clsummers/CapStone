@@ -14,7 +14,6 @@ public class LoginPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
     @FindBy(id = "ispbxii_1")
     WebElement email;
 
@@ -29,8 +28,6 @@ public class LoginPage {
 
     @FindBy(xpath = "//h1[normalize-space()='Welcome, john']")
     WebElement welcomeMessage;
-
-
 
     By tryAgainAlert = By.cssSelector(".error-message.banner");
 
@@ -56,7 +53,5 @@ public class LoginPage {
     public  void clickClearanceButton(){
         clearance.click();
     }
-
-
 
 }

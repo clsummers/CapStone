@@ -17,8 +17,7 @@ import java.time.Duration;
 * ==========================================================================================
 *
 * */
-
-public class TestAddToCart extends Base {
+public class TestAddToCart  {
 
     WebDriver driver;
     MainPage mainPage;
@@ -27,10 +26,9 @@ public class TestAddToCart extends Base {
     CartPage cartPage;
 
 
-
-/*
+/*===============================================================================================
 * browserLauncher starts up the browser at the beginning of each test and adds an implicit wait.
-*
+*================================================================================================
 * */
     @BeforeTest
     public void browserLauncher()    {
@@ -39,30 +37,34 @@ public class TestAddToCart extends Base {
         driver.get("https://www.alexandnova.com/");
     }
 
-    //Verify the prices must show up for products on the product page
+
+    /*===============================================================================================================
+    * tc0010_verify_product_display_price_test will verify that the prices show up for products on the product page.
+    * ===============================================================================================================
+    * */
     @Test(priority = 1)
-    public void verify_product_display_price_test(){
+    public void tc0010_verify_product_display_price_test(){
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         clearancePage.selectItem();
         itemDescriptionPage = new ItemDescriptionPage(driver);
-//        String expectedResult = "$29.95 USD";
-//        String actualResult = clearancePage.verifyPrice();
-//        Assert.assertEquals(expectedResult, actualResult);
         //Add assertion: Verify the prices must show up for products on the product page
         if(driver.findElement(By.cssSelector(".product-price-minimum.money.notranslate")).isDisplayed()) {
             System.out.println("The product price is displayed");
         }else {
             System.out.println("The product price is not visible..");
         }
-
     }
 
-        //Add Product to the cart and verify if product Is added to cart page
-    @Test(priority = 2)
-    public void verify_product_is_added_to_cart_test(){
+
+    /*==================================================================================================
+    * tc0011_verify_product_is_added_to_cart_test verifies that the add product function works properly.
+    * ==================================================================================================
+    * */
+    @Test(priority = 11)
+    public void tc0011_verify_product_is_added_to_cart_test(){
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
@@ -74,21 +76,21 @@ public class TestAddToCart extends Base {
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
         //add assertions: Selected products should be added to the cart.
-//        String actual = "1";
-//        String expected = itemDescriptionPage.getCartCountNumber();
-//        Assert.assertEquals(actual, expected);
         if(driver.findElement(By.cssSelector("a[class='cart-count navigable'] span[class='cart-count-number']")).isDisplayed()) {
             System.out.println("Product has been added to the cart page!");
         }else {
             System.out.println("The item has not been added..");
         }
 
-
     }
 
-    //Refresh the page and verify if items are still present in the cart
-    @Test(priority = 3)
-    public void refresh_page_test() throws InterruptedException {
+
+    /*=============================================================================================================
+    * tc0012_refresh_page_test tests that when the refresh page is clicked the items in the cart are still present.
+    * =============================================================================================================
+    * */
+    @Test(priority = 12)
+    public void tc0012_refresh_page_test() throws InterruptedException {
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
@@ -99,7 +101,6 @@ public class TestAddToCart extends Base {
         itemDescriptionPage.selectSize();
         itemDescriptionPage.selectColor();
         itemDescriptionPage.clickAddToCart();
-
         Thread.sleep(2000);
         driver.navigate().refresh();
         //add Assertion: Selected products should be added to the cart.
@@ -111,9 +112,12 @@ public class TestAddToCart extends Base {
 
     }
 
-    //Increase the quantity of the product and verify if it is showing up in cart
-    @Test(priority = 4)
-    public void increase_quantity_test(){
+    /*======================================================================================
+    * tc0013_increase_quantity_test tests that increasing the quantity shows up in the cart.
+    * ======================================================================================
+    * */
+    @Test(priority = 13)
+    public void tc0013_increase_quantity_test(){
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
@@ -135,9 +139,12 @@ public class TestAddToCart extends Base {
 
     }
 
-    //Verify Quantity of the products matches with amount displayed in cart
-    @Test(priority = 5)
-    public void verify_correct_amount_in_cart_test(){
+    /*=======================================================================================================
+    * tc0014_verify_correct_amount_in_cart_test verifies that the quantity of the product and the cart match.
+    * =======================================================================================================
+    * */
+    @Test(priority = 14)
+    public void tc0014_verify_correct_amount_in_cart_test(){
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
@@ -159,13 +166,16 @@ public class TestAddToCart extends Base {
 
     }
 
-    //Remove Product from cart: Verify that the Product should be removed from the cart and the Cart icon should show 0 items.
-    @Test(priority = 6) //Not yet working
-    public void remove_product_from_cart_test() throws InterruptedException {
+
+    /*====================================================================
+    * tc0015_remove_product_from_cart_test tests removing items from cart.
+    * ====================================================================
+    * */
+    @Test(priority = 15) //Not yet working
+    public void tc0015_remove_product_from_cart_test() throws InterruptedException {
         mainPage = new MainPage(driver);
         mainPage.clickClearanceButton();
         clearancePage = new ClearancePage(driver);
-
         clearancePage.selectItem();
         itemDescriptionPage = new ItemDescriptionPage(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -182,11 +192,6 @@ public class TestAddToCart extends Base {
         String expected = "You don't have any items in your cart yet. Continue shopping .";
         String actual = cartPage.cartWarning();
         Assert.assertEquals(expected, actual);
-
-
-
     }
-
-
 
 }
