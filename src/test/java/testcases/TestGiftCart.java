@@ -15,7 +15,7 @@ import java.time.Duration;
 * =======================================================
 * */
 
-public class TestGiftCart {
+public class TestGiftCart extends Base{
 
     WebDriver driver;
     MainPage mainPage;

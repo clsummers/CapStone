@@ -11,7 +11,7 @@ import pages.SearchResultPage;
 
 import java.time.Duration;
 
-public class TestSearchFunction {
+public class TestSearchFunction extends Base{
 
     WebDriver driver;
     MainPage mainPage;

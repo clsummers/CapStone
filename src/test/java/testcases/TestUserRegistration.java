@@ -22,7 +22,7 @@ import java.time.Duration;
 *========================================================================================================================================
 *
 */
-public class TestUserRegistration {
+public class TestUserRegistration extends Base{
 
     WebDriver driver;
     MainPage mainPage;

@@ -16,7 +16,7 @@ import java.time.Duration;
 * ============================================================================================
 * */
 
-public class TestCheckout {
+public class TestCheckout extends Base{
 
     WebDriver driver;
     MainPage mainPage;

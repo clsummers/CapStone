@@ -19,7 +19,7 @@ import java.time.Duration;
 * TestUserLogin tests the login capabilities to make sure that valid/invalid data is working correctly.
 * ====================================================================================================
 * */
-public class TestUserLogin {
+public class TestUserLogin extends Base{
 
     WebDriver driver;
     MainPage mainPage;
